@@ -1,0 +1,24 @@
+<%= render 'books/user', user: @book.user, book: @book %>
+<div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table table-striped">
+    <tbody>
+        <tr>
+          <td>
+           <% if @book.image.attach? %>
+             <%= link_to image_tag(@book.image, size: "100×100"), user_path(@book.user.id) %>
+           <% else %>
+             <%= link_to image_tag('no_image', size: "100×100"), user_path(@book.user.id) %>
+           <% end %>
+           <%= link_to @book.user.name, user_path(@book.user.id) %>
+          </td>
+          <td><%= link_to @book.title,book_path(@book.id) %></td>
+          <td><%= @book.body %></td>
+          <% if @book.user == current_user %>
+            <td><%= link_to 'Edit',edit_book_path(@book.id), class: "btn btn-success" %></td>
+            <td><%= link_to 'Destroy',book_path(@book.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+          <% end %>
+        </tr>
+    </tbody>
+  </table>
+</div>

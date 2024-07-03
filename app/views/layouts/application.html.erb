@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/142a092acd.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <span>Bookers</span>
+          </a>
+          <button class="navbar-toggler" typ="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+               <% resource = current_user %>
+              <li>
+                <%= link_to user_path(resource.id),class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-house"></i>Home</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to users_path,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-users"></i>Users</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to books_path,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-book-open"></i>Books</span>
+                <% end %>
+              </li>
+              <li>
+                 <%= link_to destroy_user_session_path, method: :delete,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-right-from-bracket"></i>Log out</span>
+                <% end %>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to root_path,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-house"></i>Home</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to about_path,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-link"></i>About</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_registration_path,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-user-plus"></i>Sign up</span>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_session_path,class: "nav-link text-light" do %>
+                <span><i class="fa-solid fa-right-to-bracket"></i>Log in</span>
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
+      <%= flash[:notice] %>
+      <p id="notice"></p>
+      <div class="container">
+        <div class="row">
+    <%= yield %>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
